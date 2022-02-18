@@ -1,12 +1,23 @@
-import { Component } from "react";
+// import React from "react";
 
-class Header extends Component{
-  render(){
-    return (
-      <header>
-        <h1><a href="/">{this.props.title}</a></h1>
-      </header>
-    );
-  }
+// class Header extends React.Component{
+//   render(){
+//     return (
+//       <header>
+//         <h1><a href="/">{this.props.title}</a></h1>
+//       </header>
+//     );
+//   }
+// }
+// export default Header;
+
+import React from 'react'
+
+export default function Header(props) {
+  return (
+    <header>
+      <h1><a href="/">{props.title}</a></h1>
+    </header>
+  )
 }
-export default Header;
+

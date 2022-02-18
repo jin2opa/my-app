@@ -1,28 +1,17 @@
-// import './App.css';
+import React, {useState} from 'react';
+import Header from './components/Header';
+import Nav from './components/Nav';
+import Section from './components/Section';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       Hello, React App!!!
-//     </div>
-//   );
-// }
+export default function App() {
+  let [title, setTitle] = useState("Web");
+  let [desc, setDesc] = useState("Web is ...");
 
-import { Component } from "react";
-import Header from "./components/Header";
-import Nav from "./components/Nav";
-import Section from "./components/Section";
-
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Header title="Web"></Header>
-        <Nav></Nav>
-        <Section title="Web" desc="Web is ..."></Section>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Header title={title}></Header>
+      <Nav></Nav>
+      <Section title={title} desc={desc}></Section>
+    </div>
+  )
 }
-
-export default App;
