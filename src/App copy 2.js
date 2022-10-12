@@ -10,7 +10,7 @@ export default function App() {
     {id:1, title:"HTML", desc:"HTML is ..."},
     {id:2, title:"CSS", desc:"CSS is ..."},
     {id:3, title:"JavaScript", desc:"JavaScript is ..."}
-  ]);
+  ])
   const [mode, setMode] = useState();
   let sect = null;
   const [id, setId] = useState();
@@ -21,67 +21,60 @@ export default function App() {
   } else if(mode === "nav"){
     for(let i=0; i<nav.length; i++){
       if(nav[i].id === id){
-        sect = <Section title={nav[i].title} desc={nav[i].desc}></Section>;
-        break;
+        sect = <Section title={nav[i].title} desc={nav[i].desc}></Section>
       }
     }
-    control = 
-    <>
+    control = <>
       <p><a href="/update" onClick={
-      (e)=>{
-        e.preventDefault();
-        setMode("update");
-      }
-      }>update</a></p>
-      <p><a href="/delete" onClick={
         (e)=>{
           e.preventDefault();
-          let newNav = [];
-          for(let i=0; i<nav.length; i++){
-            if(nav[i].id !== id){
-              newNav.push(nav[i]);
-            }
-          }
-          setNav(newNav);
-          setMode("welcome");
+          setMode("update");
         }
-      }>delete</a></p>
-    </>
-    
+      }>update</a></p>
+     <p><input type="button" value="delete" onClick={
+       ()=>{
+         let newNav = [];
+         for(let i=0; i<nav.length; i++){
+           if(nav[i].id !== id){
+             newNav.push(nav[i]);
+           }
+         }
+         setNav(newNav);
+         setMode("welcome");
+       }
+     }/></p> 
+    </>;
   } else if(mode === "insert"){
     sect = <Insert onInsert={
       (title, desc)=>{
-        let insertNav = {id: newId, title: title, desc: desc};
+        let insertNav = {id:newId, title:title, desc:desc};
         let newNav = [...nav];
         newNav.push(insertNav);
         setNav(newNav);
-        setMode("nav");
+        setMode("nav"); // !
         setId(newId);
         setNewId(newId+1);
       }
-    }></Insert>
+    }></Insert>;
   } else if(mode === "update"){
     for(let i=0; i<nav.length; i++){
       if(nav[i].id === id){
         sect = <Update title={nav[i].title} desc={nav[i].desc} onUpdate={
           (title, desc)=>{
-            let updateNav = {id: id, title:title, desc:desc};
+            let updateNav = {id: id, title: title, desc: desc};
             let newNav = [...nav];
-            for(let i=0; i<nav.length; i++){
-              if(newNav[i].id === id) {
+            for(let i=0; i<newNav.length; i++){
+              if(newNav[i].id === id){
                 newNav[i] = updateNav;
                 break;
               }
             }
             setNav(newNav);
             setMode("nav");
-            setId(id);
           }
-        }></Update>;
-        break;
+        }></Update>
       }
     }
-    
   }
   return (
     <>
